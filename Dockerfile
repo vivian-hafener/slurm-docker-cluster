@@ -1,6 +1,6 @@
 FROM rockylinux:8
 
-LABEL org.opencontainers.image.source="https://github.com/giovtorres/slurm-docker-cluster" \
+LABEL org.opencontainers.image.source="https://github.com/vhafener/slurm-docker-cluster" \
       org.opencontainers.image.title="slurm-docker-cluster" \
       org.opencontainers.image.description="Slurm Docker cluster on Rocky Linux 8" \
       org.label-schema.docker.cmd="docker-compose up -d" \
