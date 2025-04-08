@@ -3,6 +3,8 @@ set -e
 
 if [ "$1" = "slurmdbd" ]
 then
+
+    sed -i 's/cons_res/cons_tres/g' /etc/slurm/slurm.conf
     echo "---> Starting the MUNGE Authentication service (munged) ..."
     gosu munge /usr/sbin/munged
 
@@ -23,6 +25,7 @@ fi
 
 if [ "$1" = "slurmctld" ]
 then
+    sed -i 's/cons_res/cons_tres/g' /etc/slurm/slurm.conf 
     echo "---> Starting the MUNGE Authentication service (munged) ..."
     gosu munge /usr/sbin/munged
 

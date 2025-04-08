@@ -85,7 +85,8 @@ RUN set -x \
 
 COPY slurm.conf /etc/slurm/slurm.conf
 COPY slurmdbd.conf /etc/slurm/slurmdbd.conf
-RUN pwd && ls -la /etc/slurm && sed -i "s/cons_res/cons_tres/g" /etc/slurm.conf
+COPY cgroup.conf /etc/slurm/cgroup.conf
+RUN pwd && ls -la /etc/slurm && sed -i "s/cons_res/cons_tres/g" /etc/slurm/slurm.conf
 RUN set -x \
     && chown slurm:slurm /etc/slurm/slurmdbd.conf \
     && chmod 600 /etc/slurm/slurmdbd.conf
@@ -94,4 +95,6 @@ RUN set -x \
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
+RUN pwd && ls -la /etc/slurm && sed -i "s/cons_res/cons_tres/g" /etc/slurm/slurm.conf
+RUN set -x \
 CMD ["slurmdbd"]
