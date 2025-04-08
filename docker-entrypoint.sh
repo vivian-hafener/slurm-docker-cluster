@@ -48,6 +48,7 @@ fi
 
 if [ "$1" = "slurmd" ]
 then
+    wget -O /etc/slurm/cgroup.conf https://raw.githubusercontent.com/SchedMD/slurm/refs/heads/master/etc/cgroup.conf.example
     echo "---> Starting the MUNGE Authentication service (munged) ..."
     gosu munge /usr/sbin/munged
 
@@ -61,7 +62,9 @@ then
     echo "-- slurmctld is now active ..."
 
     echo "---> Starting the Slurm Node Daemon (slurmd) ..."
-    exec /usr/sbin/slurmd -Dvvv
+
+    echo "$(ls -la /var/run)"
+    exec gosu slurm /usr/sbin/slurmd -Dvvv
 fi
 
 exec "$@"

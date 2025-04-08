@@ -12,6 +12,7 @@ RUN set -ex \
     && yum -y install dnf-plugins-core \
     && yum config-manager --set-enabled powertools \
     && yum -y install \
+       dbus-devel \
        wget \
        bzip2 \
        perl \
