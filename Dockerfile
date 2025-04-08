@@ -95,5 +95,5 @@ RUN set -x \
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
-
+RUN sed -i 's/cons_res/cons_tres/g' /etc/slurm.conf
 CMD ["slurmdbd"]
