@@ -13,6 +13,8 @@ RUN set -ex \
     && yum config-manager --set-enabled powertools \
     && yum -y install \
        dbus-devel \
+       hwloc-devel \
+       libbpf-devel \
        wget \
        bzip2 \
        perl \
