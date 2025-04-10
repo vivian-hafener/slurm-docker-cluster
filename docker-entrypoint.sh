@@ -1,9 +1,10 @@
 #!/bin/bash
 set -e
-
+sed -i 's/cons_res/cons_tres/g' /etc/slurm/slurm.conf 
+sed -i 's/#SlurmdUser=root/SlurmdUser=slurm/g' /etc/slurm/slurm.conf
 if [ "$1" = "slurmdbd" ]
 then
-
+    wget -O /etc/slurm/cgroup.conf https://raw.githubusercontent.com/vivian-hafener/slurm-docker-cluster/refs/heads/main/cgroup.conf
     sed -i 's/cons_res/cons_tres/g' /etc/slurm/slurm.conf
     echo "---> Starting the MUNGE Authentication service (munged) ..."
     gosu munge /usr/sbin/munged
@@ -25,6 +26,7 @@ fi
 
 if [ "$1" = "slurmctld" ]
 then
+    wget -O /etc/slurm/cgroup.conf https://raw.githubusercontent.com/vivian-hafener/slurm-docker-cluster/refs/heads/main/cgroup.conf 
     sed -i 's/cons_res/cons_tres/g' /etc/slurm/slurm.conf 
     echo "---> Starting the MUNGE Authentication service (munged) ..."
     gosu munge /usr/sbin/munged
@@ -48,7 +50,7 @@ fi
 
 if [ "$1" = "slurmd" ]
 then
-    wget -O /etc/slurm/cgroup.conf https://raw.githubusercontent.com/SchedMD/slurm/refs/heads/master/etc/cgroup.conf.example
+    wget -O /etc/slurm/cgroup.conf https://raw.githubusercontent.com/vivian-hafener/slurm-docker-cluster/refs/heads/main/cgroup.conf
     echo "---> Starting the MUNGE Authentication service (munged) ..."
     gosu munge /usr/sbin/munged
 
