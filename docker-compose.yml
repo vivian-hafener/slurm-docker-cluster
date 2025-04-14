@@ -32,6 +32,7 @@ services:
       - mysql
     networks:
       - slurm-network
+      - slurm-network-b
 
   slurmctld:
     image: slurm-docker-cluster:${IMAGE_TAG}
@@ -49,6 +50,7 @@ services:
       - "slurmdbd"
     networks:
       - slurm-network
+      - slurm-network-b
 
   fe:
     image: slurm-docker-cluster:${IMAGE_TAG}
@@ -116,7 +118,7 @@ services:
     depends_on:
       - "slurmctld"
     networks:
-      - slurm-network
+      - slurm-network-b
 
   c4:
     image: slurm-docker-cluster:${IMAGE_TAG}
@@ -133,7 +135,7 @@ services:
     depends_on:
       - "slurmctld"
     networks:
-      - slurm-network
+      - slurm-network-b
 
 volumes:
   etc_munge:
@@ -144,4 +146,6 @@ volumes:
 
 networks:
   slurm-network:
+    driver: bridge
+  slurm-network-b:
     driver: bridge
